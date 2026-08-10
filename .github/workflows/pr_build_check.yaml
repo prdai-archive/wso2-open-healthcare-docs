@@ -31,7 +31,8 @@ jobs:
           set -o pipefail
           npm run build 2>&1 | tee build.log
         env:
-          BASE_URL: /open-healthcare-docs/
+          # Match the published site, which is served from the domain root.
+          BASE_URL: /
 
       - name: Report broken-link warnings
         if: always()

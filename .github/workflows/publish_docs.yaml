@@ -31,10 +31,13 @@ jobs:
         run: npm run build
         working-directory: en
         env:
-          BASE_URL: /open-healthcare-docs/
+          # The site is served from the root of https://healthcare.docs.wso2.com,
+          # not from a /open-healthcare-docs/ sub-path.
+          BASE_URL: /
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: en/build
+          cname: healthcare.docs.wso2.com
