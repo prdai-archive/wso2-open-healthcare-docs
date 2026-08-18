@@ -123,6 +123,67 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'FHIR Server',
+      link: { type: 'doc', id: 'fhir-server/index' },
+      items: [
+        {
+          type: 'category',
+          label: 'Get Started',
+          items: [
+            'fhir-server/get-started/introduction',
+            'fhir-server/get-started/quickstart',
+            'fhir-server/get-started/installation',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Core Concepts',
+          items: [
+            'fhir-server/concepts/architecture',
+            'fhir-server/concepts/storage',
+            'fhir-server/concepts/multi-tenancy',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Platform Capabilities',
+          items: [
+            'fhir-server/guides/implementation-guides',
+            'fhir-server/guides/terminology',
+            'fhir-server/guides/validation',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Reference',
+          items: [
+            'fhir-server/reference/api',
+            'fhir-server/reference/search',
+            'fhir-server/reference/configuration',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Operations',
+          items: [
+            'fhir-server/operations/deployment',
+            'fhir-server/operations/health-and-observability',
+            'fhir-server/performance-tuning',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Development',
+          items: [
+            'fhir-server/development/testing',
+            'fhir-server/development/extending',
+            'fhir-server/development/contributing',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Working with HL7',
       link: { type: 'doc', id: 'hl7/guides/overview' },
       items: [
