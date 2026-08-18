@@ -158,6 +158,7 @@ const sidebars: SidebarsConfig = {
           label: 'Reference',
           items: [
             'fhir-server/reference/api',
+            'fhir-server/reference/resource-types',
             'fhir-server/reference/search',
             'fhir-server/reference/configuration',
           ],

@@ -10,6 +10,7 @@ WSO2 FHIR Server stores, validates, searches, and versions FHIR R4 resources thr
   - [**Run it locally**](./get-started/quickstart.md) — Start PostgreSQL and the server with Docker Compose, then create your first Patient.
   - [**Understand the design**](./concepts/architecture.md) — Follow requests from the HTTP API through validation, storage, indexing, and search.
   - [**Use the FHIR API**](./reference/api.md) — Work with CRUD, history, transactions, validation, search, and FHIR operations.
+  - [**See what you can store**](./reference/resource-types.md) — Every FHIR R4 resource type is supported out of the box; browse them by clinical purpose.
 
 ## At a glance
 
