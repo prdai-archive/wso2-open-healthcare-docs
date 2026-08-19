@@ -18,10 +18,10 @@ Clone the repository and start the stack from its root:
 ```bash
 git clone https://github.com/wso2/fhir-server.git
 cd fhir-server
-docker-compose up -d
+docker compose up -d
 ```
 
-`-d` runs the stack in the background so the same terminal can run the commands below. Use `docker-compose logs -f` to follow the server output.
+`-d` runs the stack in the background so the same terminal can run the commands below. Use `docker compose logs -f` to follow the server output.
 
 The stack starts:
 
@@ -78,7 +78,7 @@ These credentials are local development defaults. Do not reuse them in a shared 
 ## Stop and remove local data
 
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 Continue with [Installation](./installation.md) to run the binary directly or build a container image.
