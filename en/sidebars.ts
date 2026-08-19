@@ -169,7 +169,6 @@ const sidebars: SidebarsConfig = {
           items: [
             'fhir-server/operations/deployment',
             'fhir-server/operations/health-and-observability',
-            'fhir-server/performance-tuning',
           ],
         },
         {

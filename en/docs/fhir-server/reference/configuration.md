@@ -113,4 +113,4 @@ When `database.url` is set, it overrides the individual database fields.
 Keep secrets in environment variables or a secret manager. Use YAML for non-secret, reviewable deployment defaults.
 :::
 
-See [Performance tuning](../performance-tuning.md) before changing search-plan or write-path controls.
+See [Performance tuning](https://github.com/wso2/fhir-server/blob/main/docs/performance-tuning.md) before changing search-plan or write-path controls.

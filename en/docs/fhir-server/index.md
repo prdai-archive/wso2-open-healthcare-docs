@@ -27,7 +27,7 @@ WSO2 FHIR Server stores, validates, searches, and versions FHIR R4 resources thr
 ## Choose your path
 
   - **Application developer** — Start with the [quickstart](./get-started/quickstart.md), then use the [API reference](./reference/api.md) and [search guide](./reference/search.md).
-  - **Platform operator** — Review [configuration](./reference/configuration.md), [deployment](./operations/deployment.md), and [performance tuning](./performance-tuning.md).
+  - **Platform operator** — Review [configuration](./reference/configuration.md), [deployment](./operations/deployment.md) and [performance tuning](https://github.com/wso2/fhir-server/blob/main/docs/performance-tuning.md).
   - **FHIR implementer** — Learn how [Implementation Guides](./guides/implementation-guides.md), [validation](./guides/validation.md), and [terminology](./guides/terminology.md) work.
   - **Contributor** — Read the [testing](./development/testing.md), [extension](./development/extending.md), and [contribution](./development/contributing.md) guides.
 
