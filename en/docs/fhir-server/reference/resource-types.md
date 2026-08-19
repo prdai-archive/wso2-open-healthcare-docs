@@ -48,7 +48,7 @@ Every other R4 type (research, medicinal-product definitions, messaging, testing
 
 Support for storage and CRUD is uniform, but a few capabilities are richer for commonly used types:
 
-- **Search parameters.** The base R4 search parameters are seeded at startup for all types. Heavily used clinical types (Patient, Observation, Encounter, Condition, MedicationRequest, and others) have the deepest coverage; any type can be extended with custom [SearchParameters](../development/extending.md).
+- **Search parameters.** The base R4 search parameters are seeded at startup for all types. Heavily used clinical types (Patient, Observation, Encounter, Condition, MedicationRequest, and others) have the deepest coverage; any type can be extended with custom [SearchParameters](../development/extending.md). To see exactly which parameters a running server supports for a given type, read that type's `searchParam` list in `GET /metadata`.
 - **Compartments.** `GET /Patient/{id}/*` style compartment search is available for the Patient, Encounter, and Practitioner compartments.
 - **Profiles.** Loading an [Implementation Guide](../guides/implementation-guides.md) adds profile [validation](../guides/validation.md) on top of base R4 validation for the types it constrains.
 

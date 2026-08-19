@@ -13,11 +13,15 @@ description: Start the server with Docker Compose and create your first FHIR res
 
 ## Start the stack
 
-From the repository root:
+Clone the repository and start the stack from its root:
 
 ```bash
-docker-compose up
+git clone https://github.com/wso2/fhir-server.git
+cd fhir-server
+docker-compose up -d
 ```
+
+`-d` runs the stack in the background so the same terminal can run the commands below. Use `docker-compose logs -f` to follow the server output.
 
 The stack starts:
 

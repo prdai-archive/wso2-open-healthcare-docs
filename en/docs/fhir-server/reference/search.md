@@ -78,8 +78,8 @@ curl -sS -X POST "http://localhost:9090/fhir/r4/Patient/_search" \
 
 ## Custom SearchParameters
 
-Create a FHIR SearchParameter resource, then reindex affected resources so previously stored data receives the new extracted values. New or updated resources are indexed during their write transaction.
+Create a FHIR SearchParameter resource. New or updated resources are indexed against it during their write transaction.
 
 :::warning
-Adding a SearchParameter definition does not retroactively populate index rows for existing resources. Plan and monitor a reindex operation before exposing the parameter to clients.
+Adding a SearchParameter definition does not retroactively populate index rows for existing resources, and the server currently has no `$reindex` operation ([wso2/fhir-server#11](https://github.com/wso2/fhir-server/issues/11) tracks one). Until then, an existing resource only picks up the new parameter when it is rewritten, for example by a no-op `PUT` of its current content. Plan that rewrite pass before exposing the parameter to clients.
 :::

@@ -11,7 +11,7 @@ The default FHIR base URL is:
 http://localhost:9090/fhir/r4
 ```
 
-Use `application/fhir+json` for the examples below. The server also negotiates supported FHIR XML and Turtle representations.
+Use `application/fhir+json` for the examples below. The server also negotiates `application/fhir+xml` and `application/fhir+turtle` (or `text/turtle`) through the `Content-Type` and `Accept` headers.
 
 ## Interactions
 
@@ -30,7 +30,17 @@ Use `application/fhir+json` for the examples below. The server also negotiates s
 | System transaction or batch | `POST /` |
 | CapabilityStatement | `GET /metadata` |
 | Validate | `POST /{type}/$validate` |
-| Resource graph | `GET /{type}/{id}/$everything` |
+| Resource graph (instance) | `GET /{type}/{id}/$everything` |
+| Resource graph (type; Patient, Encounter, and Group only) | `GET /{type}/$everything` |
+| Compartment search | `GET /{compartment}/{id}/{targetType}` |
+
+## Compartment search
+
+The Patient, Encounter, and Practitioner compartments are supported. A compartment search returns resources of the target type that belong to the compartment instance:
+
+```bash
+curl -sS "http://localhost:9090/fhir/r4/Patient/{id}/Observation" | jq
+```
 
 ## Create
 
@@ -67,7 +77,13 @@ curl -i -X PUT "http://localhost:9090/fhir/r4/Patient/{id}" \
 
 ## Patch
 
-JSON Patch is supported through the FHIR resource endpoint:
+Three patch formats are supported, selected by `Content-Type`:
+
+| Format | Content-Type |
+| --- | --- |
+| JSON Patch (RFC 6902) | `application/json-patch+json` |
+| FHIR Patch (`Parameters` resource) | `application/fhir+json` or `application/fhir+xml` |
+| XML Patch | `application/xml-patch+xml` |
 
 ```bash
 curl -i -X PATCH "http://localhost:9090/fhir/r4/Patient/{id}" \

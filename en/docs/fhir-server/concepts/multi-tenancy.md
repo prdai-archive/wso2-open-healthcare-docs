@@ -27,6 +27,8 @@ https://tenant.example.com/fhir/r4
 
 Run one service and database while scoping data with a tenant identifier and PostgreSQL row-level security.
 
+No configuration flag is needed: the server always mounts both the bare FHIR base path and the tenant-prefixed routes, and the row-level security policies are part of the standard schema. Requests to the bare path use the default tenant scope; requests under a tenant prefix are scoped to that tenant.
+
 Tenant-aware routes use:
 
 ```text

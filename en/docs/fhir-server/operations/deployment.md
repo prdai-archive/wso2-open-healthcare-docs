@@ -16,7 +16,7 @@ The server ships as a Go binary and container image. A production deployment als
 5. Set `BASE_URL` to the canonical externally reachable FHIR base URL.
 6. Configure read, write, idle, client, ingress, and database timeouts coherently.
 7. Put TLS and authenticated authorization enforcement in front of the service.
-8. Configure readiness and liveness probes separately.
+8. Configure liveness (`/health/live`) and readiness (`/health/ready`) probes separately.
 9. Establish backup, restore, retention, and disaster-recovery procedures.
 10. Run smoke, search, tenancy, and restore tests before accepting traffic.
 

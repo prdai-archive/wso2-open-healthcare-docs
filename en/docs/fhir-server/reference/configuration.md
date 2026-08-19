@@ -109,6 +109,16 @@ When `database.url` is set, it overrides the individual database fields.
 | `ig.forceReload` | `IG_FORCE_RELOAD` | `false` |
 | `ig.cacheDir` | `IG_CACHE_DIR` | `.fhir-ig-cache` |
 
+## Validation and terminology
+
+These controls are environment-variable only; they have no YAML key:
+
+| Environment variable | Default | Effect |
+| --- | --- | --- |
+| `FHIR_BASE_VALIDATION` | `true` | Base R4 structural validation on writes; set `false` to disable. |
+| `FHIR_VALIDATE_ON_WRITE` | `false` | Set `true` to enforce declared profiles on create and update. |
+| `FHIR_TERMINOLOGY_URL` | Empty (disabled) | Base URL of the external FHIR terminology server used by terminology-backed search modifiers. |
+
 :::tip
 Keep secrets in environment variables or a secret manager. Use YAML for non-secret, reviewable deployment defaults.
 :::

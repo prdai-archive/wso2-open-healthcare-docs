@@ -9,7 +9,13 @@ WSO2 FHIR Server stores clinical resources but delegates terminology reasoning t
 
 ## Configure the service
 
-Set the terminology base URL through the server configuration supported by your deployment. For local evaluation, use a non-production terminology endpoint and verify its licensing and availability constraints.
+Set the terminology server base URL with the `FHIR_TERMINOLOGY_URL` environment variable. When it is unset, terminology-backed search modifiers are disabled:
+
+```bash
+export FHIR_TERMINOLOGY_URL="https://tx.example.org/fhir"
+```
+
+For local evaluation, use a non-production terminology endpoint and verify its licensing and availability constraints.
 
 ## Terminology-backed search
 

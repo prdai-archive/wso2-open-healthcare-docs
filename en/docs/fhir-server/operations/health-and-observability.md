@@ -9,13 +9,19 @@ Use separate liveness and readiness signals so an orchestrator can distinguish a
 
 ## Health endpoints
 
-Check readiness:
+Check liveness (the process is up and serving HTTP):
+
+```bash
+curl -i http://localhost:9090/health/live
+```
+
+Check readiness (the instance can accept FHIR traffic):
 
 ```bash
 curl -i http://localhost:9090/health/ready
 ```
 
-A `200 OK` response indicates required initialization has completed. During startup, Implementation Guide loading and registry preparation can keep readiness closed after the listener is available.
+A `200 OK` readiness response indicates required initialization has completed. During startup, Implementation Guide loading and registry preparation can keep readiness closed after the listener is available, while liveness already returns `200 OK`.
 
 ## Structured logs
 

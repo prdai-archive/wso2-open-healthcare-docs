@@ -30,8 +30,15 @@ The response is an OperationOutcome:
 
 Base resource checks protect fundamental structure. Profile validation is deployment-controlled and applies to profiles declared in `meta.profile` when their StructureDefinitions are available.
 
+Two environment variables control the behavior:
+
+| Variable | Default | Effect |
+| --- | --- | --- |
+| `FHIR_BASE_VALIDATION` | `true` | Validates every write against the base R4 StructureDefinition. Set `false` to disable. |
+| `FHIR_VALIDATE_ON_WRITE` | `false` | Set `true` to additionally enforce declared profiles on create and update. |
+
 :::note
-The default behavior favors FHIR interoperability. Load the required Implementation Guides and enable the corresponding validation policy when a deployment requires profile enforcement.
+The default behavior favors FHIR interoperability. Load the required Implementation Guides and set `FHIR_VALIDATE_ON_WRITE=true` when a deployment requires profile enforcement.
 :::
 
 ## Profile availability
