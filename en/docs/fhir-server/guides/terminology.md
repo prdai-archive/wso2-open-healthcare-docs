@@ -34,7 +34,7 @@ curl -sS --get "http://localhost:9090/fhir/r4/Condition" \
 ## Operational considerations
 
 - Treat the terminology service as a runtime dependency for terminology-backed queries.
-- Set explicit timeouts and monitor error rates and latency.
+- The server's terminology client uses a fixed 10-second request timeout; monitor error rates and latency, and size any gateway timeouts around it.
 - Confirm CodeSystem and ValueSet licensing for every deployment.
 - Cache only where the terminology server's versioning semantics make cached results safe.
 

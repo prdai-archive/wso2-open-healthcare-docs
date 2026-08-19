@@ -32,14 +32,22 @@ Use `application/fhir+json` for the examples below. The server also negotiates `
 | Validate | `POST /{type}/$validate` |
 | Resource graph (instance) | `GET /{type}/{id}/$everything` |
 | Resource graph (type; Patient, Encounter, and Group only) | `GET /{type}/$everything` |
-| Compartment search | `GET /{compartment}/{id}/{targetType}` |
+| Compartment search | `GET /{ownerType}/{id}/{targetType}` |
 
 ## Compartment search
 
-The Patient, Encounter, and Practitioner compartments are supported. A compartment search returns resources of the target type that belong to the compartment instance:
+`{ownerType}` is the compartment owner's resource type; Patient, Encounter, and Practitioner are supported. A compartment search returns resources of the target type that belong to that owner instance:
 
 ```bash
 curl -sS "http://localhost:9090/fhir/r4/Patient/{id}/Observation" | jq
+```
+
+## $everything
+
+`$everything` returns the anchor resource and the resources referenced from its graph as a Bundle. It accepts `_type` (comma-separated resource types to include) and `_since` (RFC 3339 timestamp; only resources updated since then):
+
+```bash
+curl -sS "http://localhost:9090/fhir/r4/Patient/{id}/\$everything?_type=Observation,Condition&_since=2026-01-01T00:00:00Z" | jq
 ```
 
 ## Create

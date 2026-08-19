@@ -49,7 +49,11 @@ Read the server CapabilityStatement:
 curl -sS http://localhost:9090/fhir/r4/metadata | jq
 ```
 
-Check the reported implementation guides, supported profiles, and search parameters.
+Loaded packages appear as canonical URLs in `CapabilityStatement.implementationGuide`; supported profiles and search parameters appear under the per-type entries in `rest[0].resource`:
+
+```bash
+curl -sS http://localhost:9090/fhir/r4/metadata | jq '.implementationGuide'
+```
 
 :::tip
 Pin package versions. An unpinned package source makes startup behavior and validation rules harder to reproduce across environments.

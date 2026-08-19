@@ -35,7 +35,7 @@ The stack starts:
 Wait until readiness returns `200 OK`:
 
 ```bash
-curl -sv http://localhost:9090/health/ready
+until curl -sf http://localhost:9090/health/ready; do sleep 2; done
 ```
 
 ## Create a Patient
