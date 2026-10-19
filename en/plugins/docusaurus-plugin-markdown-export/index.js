@@ -4,6 +4,7 @@ const { processMarkdownFile } = require('./mdxProcessor');
 
 module.exports = function pluginMarkdownExport(context, options = {}) {
   const { siteDir } = context;
+  let docSources = null;
 
   // Recursively find all .md and .mdx files
   function findMarkdownFiles(dir, baseDir = dir) {
@@ -30,21 +31,25 @@ module.exports = function pluginMarkdownExport(context, options = {}) {
     return files;
   }
 
-  // Export markdown files
-  async function exportAllDocs(outputBaseDir) {
-    let totalExported = 0;
-    const docsDir = path.join(siteDir, 'docs');
+  function routeToOutputSegments(routePath) {
+    const relativePath = routePath.startsWith(context.baseUrl)
+      ? routePath.slice(context.baseUrl.length)
+      : routePath.replace(/^\//, '');
+    return relativePath.split('/').filter(Boolean);
+  }
 
+  async function exportDocs(docsDir, outputDir) {
     if (!fs.existsSync(docsDir)) {
-      console.warn('[markdown-export] docs directory not found');
+      console.warn(`[markdown-export] docs directory not found: ${docsDir}`);
       return 0;
     }
 
     const files = findMarkdownFiles(docsDir);
-    console.log(`[markdown-export] Processing ${files.length} docs`);
+    console.log(`[markdown-export] Processing ${files.length} docs from ${docsDir}`);
 
+    let totalExported = 0;
     for (const { fullPath, slug } of files) {
-      const outputPath = path.join(outputBaseDir, 'docs', slug + '.md');
+      const outputPath = path.join(outputDir, slug + '.md');
 
       try {
         const sourceContent = fs.readFileSync(fullPath, 'utf-8');
@@ -65,22 +70,47 @@ module.exports = function pluginMarkdownExport(context, options = {}) {
     return totalExported;
   }
 
+  async function exportAllDocs(outputBaseDir) {
+    if (!docSources) {
+      console.warn('[markdown-export] docs versions are not loaded');
+      return 0;
+    }
+
+    let totalExported = 0;
+    for (const { docsDir, routePath } of docSources) {
+      const outputDir = path.join(outputBaseDir, ...routeToOutputSegments(routePath));
+      totalExported += await exportDocs(docsDir, outputDir);
+    }
+
+    return totalExported;
+  }
+
   return {
     name: 'docusaurus-plugin-markdown-export',
 
-    // Generate during development
-    async loadContent() {
+    async contentLoaded({ allContent }) {
+      const loadedVersions =
+        allContent['docusaurus-plugin-content-docs']?.default?.loadedVersions ?? [];
+
+      docSources = loadedVersions.map((version) => ({
+        docsDir: version.contentPath,
+        routePath: version.path,
+      }));
+
+      if (process.env.NODE_ENV !== 'development' || docSources.length === 0) {
+        return;
+      }
+
       console.log('[markdown-export] Generating markdown files for development...');
-      const staticDocsDir = path.join(siteDir, 'static');
-      const totalExported = await exportAllDocs(staticDocsDir);
-      console.log(`[markdown-export] Exported ${totalExported} markdown files to static/docs/`);
+      const totalExported = await exportAllDocs(path.join(siteDir, 'static'));
+      console.log(`[markdown-export] Exported ${totalExported} markdown files`);
     },
 
     // Generate during build
     async postBuild({ outDir }) {
       console.log('[markdown-export] Generating markdown files for build...');
       const totalExported = await exportAllDocs(outDir);
-      console.log(`[markdown-export] Exported ${totalExported} markdown files to build/docs/`);
+      console.log(`[markdown-export] Exported ${totalExported} markdown files`);
     },
   };
 };

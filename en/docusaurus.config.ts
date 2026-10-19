@@ -56,6 +56,11 @@ const config: Config = {
           showLastUpdateTime: true,
           exclude: ['**/old-content/**'],
           rehypePlugins: [[rehypeFixAssetImages, {baseUrl}]],
+          versions: {
+            current: {
+              label: 'Next (main)',
+            },
+          },
         },
         blog: false,
         theme: {
@@ -98,6 +103,7 @@ const config: Config = {
         { to: '/docs/hl7/guides/overview', label: 'HL7', position: 'left' },
         { to: '/docs/data-transformation/guides/hl7v2-fhir', label: 'Data Transformation', position: 'left' },
         { to: '/docs/secure-health-apis/guides/smart-on-fhir-overview', label: 'Security', position: 'left' },
+        { type: 'docsVersionDropdown', position: 'right', dropdownActiveClassDisabled: true },
         { href: 'https://github.com/wso2/open-healthcare-docs', label: 'GitHub', position: 'right' },
       ],
     },
